@@ -1,12 +1,10 @@
 class Room
 
-attr_reader :name, :till, :stock
+attr_reader :name, :capacity
 
- def initialize(name, till, stock)
+ def initialize(name, capacity)
    @name = name
-   @till = till
-   @drinks = []
-   @stock = stock
+   @capacity = capacity
  end
 
-end 
+end
