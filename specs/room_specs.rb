@@ -49,5 +49,17 @@ class RoomTest < Minitest::Test
     assert_equal(false, @room1.check_in(@group2))
   end
 
+  def test_can_add_song_to_room
+    result = @room1.add_song(@song1)
+    assert_equal(1, result.length)
+  end
+
+  
+
+  # def test_room_has_playlist_by_name
+  #   playlist = @room1.add_song(@song1)
+  #   assert_equal("Smells Like Teen Spirit", playlist.name)
+  # end
+
 
 end
