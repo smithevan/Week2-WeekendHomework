@@ -41,20 +41,42 @@ class RoomTest < Minitest::Test
     assert_equal(4, @room1.capacity)
   end
 
-  def test_guest_can_check_into_room__under_capacity
-    assert_equal(true, @room1.check_in(@group1))
+  def test_group_can_check_into_room__under_capacity
+    assert_equal(true, @room1.capacity_check(@group1))
   end
 
-  def test_guest_can_check_into_room__over_capacity
-    assert_equal(false, @room1.check_in(@group2))
+  def test_get_number_of_people_in_room__initial
+    assert_equal(0, @room1.get_group_number)
+  end
+
+  def test_get_number_of_songs_in_playlist__initial
+    assert_equal(0, @room1.get_playlist_number)
   end
 
   def test_can_add_song_to_room
-    result = @room1.add_song(@song1)
-    assert_equal(1, result.length)
+    room_with_song = @room1.add_song(@song1)
+    assert_equal(1, room_with_song.length)
   end
 
-  
+  def test_can_add_guest_to_room__by_number
+    room_with_guest = @room1.add_guest(@guest1)
+    assert_equal(1, room_with_guest.length)
+  end
+
+  # def test_can_add_guest_to_room__by_name
+  #   room_with_guest = @room1.add_guest(@guest1)
+  #   assert_equal("Bob", room_with_guest)
+  # end
+
+  def test_group_can_check_into_room__over_capacity
+    assert_equal(false, @room1.capacity_check(@group2))
+  end
+
+
+
+
+
+
 
   # def test_room_has_playlist_by_name
   #   playlist = @room1.add_song(@song1)

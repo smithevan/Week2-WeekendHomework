@@ -9,7 +9,15 @@ attr_reader :name, :capacity
    @playlist = []
  end
 
- def check_in(group)
+ def get_group_number
+   return @group.length
+ end
+
+ def get_playlist_number
+   return @playlist.length
+ end
+
+ def capacity_check(group)
    @group = group
    return true if @capacity >= @group.length
    return false
@@ -17,6 +25,10 @@ attr_reader :name, :capacity
 
  def add_song(song)
    @playlist.push(song)
+ end
+
+ def add_guest(guest)
+   @group.push(guest)
  end
 
 
