@@ -11,7 +11,7 @@ class SongTest < Minitest::Test
   def setup
     @song1 = Song.new("Smells Like Teen Spirit")
     @song2 = Song.new("Toxic")
-    @song3 = Song.new("")
+    @song3 = Song.new("Wonderwall")
   end
 
   def test_get_song_name
