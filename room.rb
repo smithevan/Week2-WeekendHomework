@@ -42,6 +42,10 @@ end
    return @group.map{ |name| name.name}
  end
 
+ def checkout(guest_leaving)
+   return @group.delete(guest_leaving)
+ end
+
  def capacity_check(group)
    @group = group
    return true if @capacity >= @group.length
@@ -51,6 +55,8 @@ end
  def purchase(price)
    @till += price
  end
+
+
 
 
 

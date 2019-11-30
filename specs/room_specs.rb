@@ -13,11 +13,11 @@ class RoomTest < Minitest::Test
   def setup
     @room1 = Room.new("One", 4, 500.00)
 
-    @guest1 = Guest.new("Bob", 10.00)
-    @guest2 = Guest.new("Abby", 20.00)
-    @guest3 = Guest.new("Gill", 15.00)
-    @guest4 = Guest.new("Gabby", 12.00)
-    @guest5 = Guest.new("Robert", 8.00)
+    @guest1 = Guest.new("Bob", 10.00, "Iron man")
+    @guest2 = Guest.new("Abby", 20.00, "Polly")
+    @guest3 = Guest.new("Gill", 15.00, "Boots are made for walking")
+    @guest4 = Guest.new("Gabby", 12.00, "Smells Like Teen Spirit")
+    @guest5 = Guest.new("Robert", 8.00, "Toxic")
 
     @song1 = Song.new("Smells Like Teen Spirit", "Nirvana", "Grunge")
     @song2 = Song.new("Wonderwall", "Oasis", "Alternative")
@@ -99,6 +99,19 @@ class RoomTest < Minitest::Test
     assert_equal(["Bob", "Abby", "Gill"], @room1.group_names)
   end
 
+  def test_guest_can_check_out
+    @room1.add_guest(@guest1)
+    @room1.add_guest(@guest2)
+    @room1.checkout(@guest1)
+    assert_equal(["Abby"], @room1.group_names)
+  end
+
+  def test_guest_can_check_out_from_group
+    @room1.add_group(@group1)
+    @room1.checkout(@guest2)
+    assert_equal(["Bob", "Gill"], @room1.group_names)
+  end
+
   def test_group_can_check_into_room__under_capacity
     assert_equal(true, @room1.capacity_check(@group1))
   end
@@ -123,6 +136,16 @@ class RoomTest < Minitest::Test
     @room1.purchase(5.00)
     assert_equal(505.00, @room1.till)
   end
+
+  def test_favourite_song
+    @room1.add_playlist(@playlist)
+    @room1.add_group(@group1)
+    @guest1.favourite_song(@song1)
+
+  end
+
+
+
 
 
 

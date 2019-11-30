@@ -9,7 +9,8 @@ require_relative('../song')
 class GuestTest < Minitest::Test
 
   def setup
-    @guest1 = Guest.new("Bob", 10.00)
+    @guest1 = Guest.new("Bob", 10.00, "Smells Like Teen Spirit")
+    @guest2 = Guest.new("Peter", 50.00, "Seven Nation Army")
 
     @song1 = Song.new("Smells Like Teen Spirit", "Nirvana", "Grunge")
   end
@@ -25,6 +26,11 @@ class GuestTest < Minitest::Test
   def test_wallet_can_decrease
     @guest1.entry_fee(5.00)
     assert_equal(5.00, @guest1.wallet)
+  end
+
+  def test_guest_has_favourite_song
+    assert_equal("Whooo", @guest1.favourite_song(@song1.name))
+
   end
 
 end
