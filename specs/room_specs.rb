@@ -11,7 +11,7 @@ require_relative('../song')
 class RoomTest < Minitest::Test
 
   def setup
-    @room1 = Room.new("One", 4)
+    @room1 = Room.new("One", 4, 500.00)
 
     @guest1 = Guest.new("Bob", 10.00)
     @guest2 = Guest.new("Abby", 20.00)
@@ -105,6 +105,23 @@ class RoomTest < Minitest::Test
 
   def test_group_can_check_into_room__over_capacity
     assert_equal(false, @room1.capacity_check(@group2))
+  end
+
+  def test_customer_wallet_decreases_when_entering_room
+    @room1.add_guest(@guest2)
+    @guest2.entry_fee(5.00)
+    assert_equal(15.00, @guest2.wallet)
+  end
+
+  def test_get_till
+    assert_equal(500.00, @room1.till)
+  end
+
+  def test_till_increases_when_customer_buys_room
+    @room1.add_guest(@guest2)
+    @guest2.entry_fee(5.00)
+    @room1.purchase(5.00)
+    assert_equal(505.00, @room1.till)
   end
 
 

@@ -1,10 +1,11 @@
 class Room
 
-attr_reader :name, :capacity
+attr_reader :name, :capacity, :till
 
- def initialize(name, capacity)
+ def initialize(name, capacity, till)
    @name = name
    @capacity = capacity
+   @till = till
    @group = []
    @playlist = []
  end
@@ -45,6 +46,10 @@ end
    @group = group
    return true if @capacity >= @group.length
    return false
+ end
+
+ def purchase(price)
+   @till += price
  end
 
 

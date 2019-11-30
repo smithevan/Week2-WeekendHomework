@@ -11,7 +11,7 @@ class GuestTest < Minitest::Test
   def setup
     @guest1 = Guest.new("Bob", 10.00)
 
-    @song1 = Song.new("Smells Like Teen Spirit")
+    @song1 = Song.new("Smells Like Teen Spirit", "Nirvana", "Grunge")
   end
 
   def test_get_guest_name
@@ -20,6 +20,11 @@ class GuestTest < Minitest::Test
 
   def test_get_guest_wallet
     assert_equal(10.00, @guest1.wallet)
+  end
+
+  def test_wallet_can_decrease
+    @guest1.entry_fee(5.00)
+    assert_equal(5.00, @guest1.wallet)
   end
 
 end

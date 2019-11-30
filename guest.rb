@@ -7,5 +7,9 @@ attr_reader :name, :wallet
    @wallet = wallet
  end
 
+ def entry_fee(entry_fee)
+   @wallet -= entry_fee
+ end
+
 
 end
