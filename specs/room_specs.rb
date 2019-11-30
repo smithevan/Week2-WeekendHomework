@@ -150,7 +150,4 @@ class RoomTest < Minitest::Test
 
 
 
-
-
-
 end
