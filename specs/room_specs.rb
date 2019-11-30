@@ -14,7 +14,7 @@ class RoomTest < Minitest::Test
     @room1 = Room.new("One", 4, 500.00)
 
     @guest1 = Guest.new("Bob", 10.00, "Iron man")
-    @guest2 = Guest.new("Abby", 20.00, "Polly")
+    @guest2 = Guest.new("Abby", 20.00, "Lonely Boy")
     @guest3 = Guest.new("Gill", 15.00, "Boots are made for walking")
     @guest4 = Guest.new("Gabby", 12.00, "Smells Like Teen Spirit")
     @guest5 = Guest.new("Robert", 8.00, "Toxic")
@@ -140,8 +140,10 @@ class RoomTest < Minitest::Test
   def test_favourite_song
     @room1.add_playlist(@playlist)
     @room1.add_group(@group1)
-    @guest1.favourite_song(@song1)
-
+    assert_equal("Whooo", @guest4.favourite_song(@song1.name))
+    assert_nil(@guest1.favourite_song(@song1.name))
+    assert_equal("Whooo", @guest2.favourite_song(@song5.name))
+    assert_nil(@guest1.favourite_song(@song5.name))
   end
 
 

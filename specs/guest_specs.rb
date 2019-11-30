@@ -30,7 +30,7 @@ class GuestTest < Minitest::Test
 
   def test_guest_has_favourite_song
     assert_equal("Whooo", @guest1.favourite_song(@song1.name))
-
+    assert_nil(@guest2.favourite_song(@song1.name))
   end
 
 end
