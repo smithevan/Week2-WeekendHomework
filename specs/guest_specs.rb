@@ -5,6 +5,7 @@ Minitest::Reporters.use! Minitest::Reporters::SpecReporter.new
 
 require_relative('../guest')
 require_relative('../song')
+require_relative('../drink')
 
 class GuestTest < Minitest::Test
 
@@ -13,6 +14,8 @@ class GuestTest < Minitest::Test
     @guest2 = Guest.new("Peter", 50.00, "Seven Nation Army")
 
     @song1 = Song.new("Smells Like Teen Spirit", "Nirvana", "Grunge")
+
+    @drink1 = Drink.new("Guiness", 4.00)
   end
 
   def test_get_guest_name
@@ -33,4 +36,7 @@ class GuestTest < Minitest::Test
     assert_nil(@guest2.favourite_song(@song1.name))
   end
 
+  def test_guest_can_take_drink
+    assert_equal(["Guiness"], @guest1.take_drink(@drink1.drink_name))
+  end
 end

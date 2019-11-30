@@ -43,8 +43,16 @@ class BarTest < Minitest::Test
     assert_equal(1000.00, @bar1.bar_till)
   end
 
+  def test_number_of_rooms_in_bar
+    assert_equal(0, @bar1.rooms_in_bar)
+  end
+
   def test_bar_has_rooms
-    assert_equal(@bar_with_four_rooms, @bar1.add_rooms(@bar_with_four_rooms))
+    @bar1.add_rooms(@room1)
+    @bar1.add_rooms(@room2)
+    @bar1.add_rooms(@room3)
+    @bar1.add_rooms(@room4)
+    assert_equal(@bar_with_four_rooms.length, @bar1.rooms_in_bar)
   end
 
   def test_bar_has_drinks__test_name_single_drink
@@ -58,6 +66,27 @@ class BarTest < Minitest::Test
     @bar1.add_drink(@drink4)
     @bar1.add_drink(@drink5)
     assert_equal(@bar_with_drinks, @bar1.get_drinks)
+  end
+
+  def test_drink_can_be_removed
+    @bar1.add_drink(@drink1)
+    @bar1.add_drink(@drink2)
+    assert_equal([@drink1], @bar1.remove_drink(@drink2))
+  end
+
+  def test_drink_count
+    @bar1.add_drink(@drink1)
+    @bar1.add_drink(@drink2)
+    assert_equal(2, @bar1.drink_count)
+  end
+
+  def test_guest_can_take_drink
+    @bar1.add_drink(@drink1)
+    @bar1.add_drink(@drink2)
+    @bar1.add_drink(@drink3)
+    @guest1.take_drink(@drink1)
+    @bar1.remove_drink(@drink1)
+    assert_equal(2, @bar1.drink_count)
   end
 
 end

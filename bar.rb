@@ -9,8 +9,12 @@ attr_reader :bar_name, :bar_till
    @drinks = []
  end
 
- def add_rooms(rooms)
-   @rooms = rooms
+ def rooms_in_bar
+   @rooms.length
+ end
+
+ def add_rooms(room)
+   @rooms.push(room)
  end
 
  def add_drink(drink)
@@ -19,6 +23,15 @@ attr_reader :bar_name, :bar_till
 
  def get_drinks
    @drinks
- end 
+ end
+
+ def remove_drink(drink)
+   @drinks.delete(drink)
+   return @drinks
+ end
+
+ def drink_count
+   @drinks.length 
+ end
 
 end
