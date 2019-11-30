@@ -19,12 +19,12 @@ class RoomTest < Minitest::Test
     @guest4 = Guest.new("Gabby", 12.00)
     @guest5 = Guest.new("Robert", 8.00)
 
-    @song1 = Song.new("Smells Like Teen Spirit")
-    @song2 = Song.new("Wonderwall")
-    @song3 = Song.new("Toxic")
-    @song4 = Song.new("When I'm 64")
-    @song5 = Song.new("Rocking in the Free World")
-    @song6 = Song.new("Born This Way")
+    @song1 = Song.new("Smells Like Teen Spirit", "Nirvana", "Grunge")
+    @song2 = Song.new("Wonderwall", "Oasis", "Alternative")
+    @song3 = Song.new("Toxic", "Britney Spears", "Pop")
+    @song4 = Song.new("When I'm 64", "Beatles", "Rock")
+    @song5 = Song.new("Lonely Boy", "Black Keys", "Indie")
+    @song6 = Song.new("Californication", "Red Hot Chili Peppers", "Pop/Rock")
 
     @group1 = [@guest1, @guest2, @guest3]
     @group2 = [@guest1, @guest2, @guest3, @guest4, @guest5]
@@ -41,21 +41,38 @@ class RoomTest < Minitest::Test
     assert_equal(4, @room1.capacity)
   end
 
-  def test_group_can_check_into_room__under_capacity
-    assert_equal(true, @room1.capacity_check(@group1))
-  end
-
   def test_get_number_of_people_in_room__initial
     assert_equal(0, @room1.get_group_number)
+  end
+
+  def test_can_add_song_to_room
+    room_with_songs = @room1.add_song(@song1)
+    assert_equal(1, room_with_songs.length)
   end
 
   def test_get_number_of_songs_in_playlist__initial
     assert_equal(0, @room1.get_playlist_number)
   end
 
-  def test_can_add_song_to_room
-    room_with_song = @room1.add_song(@song1)
-    assert_equal(1, room_with_song.length)
+  def test_get_number_of_songs_in_playlist__full
+    room_with_songs = @room1.add_song(@song1)
+    room_with_songs = @room1.add_song(@song2)
+    room_with_songs = @room1.add_song(@song3)
+    assert_equal(3, room_with_songs.length)
+  end
+
+  def test_add_whole_playlist_to_room
+    room_with_songs = @room1.add_playlist(@playlist)
+    assert_equal(6, room_with_songs.length)
+  end
+
+  def test_add_song_to_room_name_match
+    room_with_songs = @room1.add_song(@song1)
+    assert_equal("Smells Like Teen Spirit", room_with_songs[0].name)
+  end
+
+  def test_room_begins_empty
+    assert_equal(0, @room1.check_empty)
   end
 
   def test_can_add_guest_to_room__by_number
@@ -63,25 +80,14 @@ class RoomTest < Minitest::Test
     assert_equal(1, room_with_guest.length)
   end
 
-  # def test_can_add_guest_to_room__by_name
-  #   room_with_guest = @room1.add_guest(@guest1)
-  #   assert_equal("Bob", room_with_guest)
-  # end
+  def test_group_can_check_into_room__under_capacity
+    assert_equal(true, @room1.capacity_check(@group1))
+  end
 
   def test_group_can_check_into_room__over_capacity
     assert_equal(false, @room1.capacity_check(@group2))
   end
 
-
-
-
-
-
-
-  # def test_room_has_playlist_by_name
-  #   playlist = @room1.add_song(@song1)
-  #   assert_equal("Smells Like Teen Spirit", playlist.name)
-  # end
 
 
 end
