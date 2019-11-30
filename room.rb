@@ -21,12 +21,24 @@ attr_reader :name, :capacity
    @playlist = playlist
  end
 
+ def add_group(group)
+  @group = group
+end
+
  def get_playlist_number
    return @playlist.length
  end
 
  def check_empty
    return @group.length
+ end
+
+ def add_guest(guest)
+   @group.push(guest)
+ end
+
+ def group_names
+   return @group.map{ |name| name.name}
  end
 
  def capacity_check(group)
@@ -37,9 +49,7 @@ attr_reader :name, :capacity
 
 
 
- def add_guest(guest)
-   @group.push(guest)
- end
+
 
 
 end

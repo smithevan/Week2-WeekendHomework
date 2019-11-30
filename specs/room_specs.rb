@@ -71,6 +71,11 @@ class RoomTest < Minitest::Test
     assert_equal("Smells Like Teen Spirit", room_with_songs[0].name)
   end
 
+  def test_add_song_to_room_genre_match
+    room_with_songs = @room1.add_song(@song1)
+    assert_equal("Grunge", room_with_songs[0].genre)
+  end
+
   def test_room_begins_empty
     assert_equal(0, @room1.check_empty)
   end
@@ -78,6 +83,20 @@ class RoomTest < Minitest::Test
   def test_can_add_guest_to_room__by_number
     room_with_guest = @room1.add_guest(@guest1)
     assert_equal(1, room_with_guest.length)
+  end
+
+  def test_can_add_guest_to_room__by_name
+    room_with_guest = @room1.add_guest(@guest1.name)
+    assert_equal("Bob", room_with_guest[0])
+  end
+
+  def test_can_add_group_to_room
+    assert_equal(@group1, @room1.add_group(@group1))
+  end
+
+  def test_get_group_names
+    @room1.add_group(@group1)
+    assert_equal(["Bob", "Abby", "Gill"], @room1.group_names)
   end
 
   def test_group_can_check_into_room__under_capacity
