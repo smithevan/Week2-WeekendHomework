@@ -13,7 +13,7 @@ class RoomTest < Minitest::Test
   def setup
     @room1 = Room.new("One", 4, 500.00)
 
-    @guest1 = Guest.new("Bob", 10.00, "Iron man")
+    @guest1 = Guest.new("Bob", 10.00, "Back in Black ")
     @guest2 = Guest.new("Abby", 20.00, "Lonely Boy")
     @guest3 = Guest.new("Gill", 15.00, "Boots are made for walking")
     @guest4 = Guest.new("Gabby", 12.00, "Smells Like Teen Spirit")
@@ -145,6 +145,8 @@ class RoomTest < Minitest::Test
     assert_equal("Whooo", @guest2.favourite_song(@song5.name))
     assert_nil(@guest1.favourite_song(@song5.name))
   end
+
+
 
 
 
