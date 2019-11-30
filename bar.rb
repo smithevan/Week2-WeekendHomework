@@ -31,7 +31,11 @@ attr_reader :bar_name, :bar_till
  end
 
  def drink_count
-   @drinks.length 
+   @drinks.length
  end
+
+ def make_sale(item_sold)
+   @bar_till += item_sold
+ end 
 
 end

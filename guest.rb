@@ -19,6 +19,10 @@ attr_reader :name, :wallet, :favourite_song
 
  def take_drink(drink)
    @drinks.push(drink)
+ end
+
+ def drink_charge(price)
+   @wallet -= price
  end 
 
 end

@@ -89,4 +89,21 @@ class BarTest < Minitest::Test
     assert_equal(2, @bar1.drink_count)
   end
 
+  def test_buying_drink_removes_customer_money
+    @bar1.add_drink(@drink1)
+    @guest1.take_drink(@drink1)
+    @bar1.remove_drink(@drink1)
+    @guest1.drink_charge(@drink1.price)
+    assert_equal(6.00, @guest1.wallet)
+  end
+
+  def test_buying_drink_increases_bar_till
+    @bar1.add_drink(@drink1)
+    @guest1.take_drink(@drink1)
+    @bar1.remove_drink(@drink1)
+    @guest1.drink_charge(@drink1.price)
+    @bar1.make_sale(@drink1.price)
+    assert_equal(1004.00, @bar1.bar_till)
+  end
+
 end
