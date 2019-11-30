@@ -6,6 +6,7 @@ attr_reader :bar_name, :bar_till
    @bar_name = bar_name
    @bar_till = bar_till
    @rooms = []
+   @drinks = [] 
  end
 
  def add_rooms(rooms)
