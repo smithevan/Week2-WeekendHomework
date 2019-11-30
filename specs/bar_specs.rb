@@ -27,6 +27,8 @@ class BarTest < Minitest::Test
     @drink4 = Drink.new("Rum", 3.00)
     @drink5 = Drink.new("Juice", 2.00)
 
+    @bar_with_drinks = [@drink1, @drink2, @drink3, @drink4, @drink5]
+
     @guest1 = Guest.new("Bob", 10.00, "Back in Black")
     @guest2 = Guest.new("Abby", 20.00, "Lonely Boy")
     @guest3 = Guest.new("Gill", 15.00, "Boots are made for walking")
@@ -45,8 +47,17 @@ class BarTest < Minitest::Test
     assert_equal(@bar_with_four_rooms, @bar1.add_rooms(@bar_with_four_rooms))
   end
 
-  def test_bar_has_drinks__test_name
+  def test_bar_has_drinks__test_name_single_drink
     assert_equal(["Guiness"], @bar1.add_drink(@drink1.drink_name))
+  end
+
+  def test_bar_has_drinks__test_name_mulitple_drinks
+    @bar1.add_drink(@drink1)
+    @bar1.add_drink(@drink2)
+    @bar1.add_drink(@drink3)
+    @bar1.add_drink(@drink4)
+    @bar1.add_drink(@drink5)
+    assert_equal(@bar_with_drinks, @bar1.get_drinks)
   end
 
 end

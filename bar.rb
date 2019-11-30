@@ -17,4 +17,8 @@ attr_reader :bar_name, :bar_till
    @drinks.push(drink)
  end
 
+ def get_drinks
+   @drinks
+ end 
+
 end
