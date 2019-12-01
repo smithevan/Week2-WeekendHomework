@@ -111,11 +111,14 @@ class BarTest < Minitest::Test
     @bar1.add_drink(@drink2)
     @bar1.add_drink(@drink3)
     @bar1.remove_drink(@drink1)
-    @bar1.remove_drink(@drink2)
-    @bar1.run_tab(@drink1.price, @guest1.name)
-    @bar1.run_tab(@drink2.price, @guest1.name)
-    @guest1.drink_charge(@tab[:name], @tab[:price])
-    @bar1.make_sale(@drink1.price)
+
+    @bar1.run_tab(@guest1.name, @drink1.price)
+
+    @guest1.drink_charge(@bar1.tab[:name], @bar1.tab[:tab])
+    assert_equal(6.00, @guest1.wallet)
+
+    #@bar1.make_sale(@tab.price)
+
   end
 
 

@@ -1,13 +1,13 @@
 class Bar
 
-attr_reader :bar_name, :bar_till
+attr_reader :bar_name, :bar_till, :tab
 
  def initialize(bar_name, bar_till)
    @bar_name = bar_name
    @bar_till = bar_till
    @rooms = []
    @drinks = []
-   @tab = []
+   @tab = Hash.new()
  end
 
  def rooms_in_bar
@@ -39,9 +39,10 @@ attr_reader :bar_name, :bar_till
    @bar_till += item_sold
  end
 
- def run_tab(drink_price, customer_name)
-   @tab.push ({'name' => customer_name, 'tab' => drink_price})
-  # @tab.push(customer_name[:name], drink_price[:price])
+ def run_tab(customer_name, drink_price)
+   @tab = {:name => customer_name, :tab => drink_price}
  end
+
+
 
 end
