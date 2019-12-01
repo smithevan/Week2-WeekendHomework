@@ -106,19 +106,16 @@ class BarTest < Minitest::Test
     assert_equal(1004.00, @bar1.bar_till)
   end
 
-  def test_bar_can_run_a_tab_under_customer_name
+  def test_bar_can_run_a_tab_under_customer_name_and_complete_sale_later
     @bar1.add_drink(@drink1)
     @bar1.add_drink(@drink2)
     @bar1.add_drink(@drink3)
     @bar1.remove_drink(@drink1)
-
     @bar1.run_tab(@guest1.name, @drink1.price)
-
     @guest1.drink_charge(@bar1.tab[:name], @bar1.tab[:tab])
+    @bar1.make_sale(@bar1.tab[:tab])
     assert_equal(6.00, @guest1.wallet)
-
-    #@bar1.make_sale(@tab.price)
-
+    assert_equal(1004.00, @bar1.bar_till)
   end
 
 
