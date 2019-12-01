@@ -40,9 +40,15 @@ class GuestTest < Minitest::Test
     assert_equal(["Guiness"], @guest1.take_drink(@drink1.drink_name))
   end
 
-  def test_adding_drink_reduces_wallet
+  def test_adding_drink_reduces_wallet__no_name
     @guest1.take_drink(@drink1)
-    @guest1.drink_charge(@drink1.price)
+    @guest1.drink_charge(nil, @drink1.price)
+    assert_equal(6.00, @guest1.wallet)
+  end
+
+  def test_adding_drink_reduces_wallet__called_by_name
+    @guest1.take_drink(@drink1)
+    @guest1.drink_charge("Bob", @drink1.price)
     assert_equal(6.00, @guest1.wallet)
   end
 end

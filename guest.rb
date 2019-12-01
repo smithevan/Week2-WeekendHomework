@@ -21,8 +21,10 @@ attr_reader :name, :wallet, :favourite_song
    @drinks.push(drink)
  end
 
- def drink_charge(price)
-   @wallet -= price
- end 
+ def drink_charge(name, price)
+  return @wallet -= price if name = @name || if name == nil
+ end
+ 
+ end
 
 end

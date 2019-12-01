@@ -7,6 +7,7 @@ attr_reader :bar_name, :bar_till
    @bar_till = bar_till
    @rooms = []
    @drinks = []
+   @tab = []
  end
 
  def rooms_in_bar
@@ -36,6 +37,11 @@ attr_reader :bar_name, :bar_till
 
  def make_sale(item_sold)
    @bar_till += item_sold
- end 
+ end
+
+ def run_tab(drink_price, customer_name)
+   @tab.push ({'name' => customer_name, 'tab' => drink_price})
+  # @tab.push(customer_name[:name], drink_price[:price])
+ end
 
 end

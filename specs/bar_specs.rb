@@ -93,7 +93,7 @@ class BarTest < Minitest::Test
     @bar1.add_drink(@drink1)
     @guest1.take_drink(@drink1)
     @bar1.remove_drink(@drink1)
-    @guest1.drink_charge(@drink1.price)
+    @guest1.drink_charge(nil, @drink1.price)
     assert_equal(6.00, @guest1.wallet)
   end
 
@@ -101,9 +101,22 @@ class BarTest < Minitest::Test
     @bar1.add_drink(@drink1)
     @guest1.take_drink(@drink1)
     @bar1.remove_drink(@drink1)
-    @guest1.drink_charge(@drink1.price)
+    @guest1.drink_charge(nil, @drink1.price)
     @bar1.make_sale(@drink1.price)
     assert_equal(1004.00, @bar1.bar_till)
   end
+
+  def test_bar_can_run_a_tab_under_customer_name
+    @bar1.add_drink(@drink1)
+    @bar1.add_drink(@drink2)
+    @bar1.add_drink(@drink3)
+    @bar1.remove_drink(@drink1)
+    @bar1.remove_drink(@drink2)
+    @bar1.run_tab(@drink1.price, @guest1.name)
+    @bar1.run_tab(@drink2.price, @guest1.name)
+    @guest1.drink_charge(@tab[:name], @tab[:price])
+    @bar1.make_sale(@drink1.price)
+  end
+
 
 end
