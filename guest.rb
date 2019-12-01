@@ -24,7 +24,11 @@ attr_reader :name, :wallet, :favourite_song
  def drink_charge(name, price)
   return @wallet -= price if name = @name || if name == nil
  end
- 
+ end
+
+ def can_afford_drink(drink)
+   return true if @wallet >= drink
+   return false 
  end
 
 end

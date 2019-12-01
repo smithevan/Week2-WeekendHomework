@@ -43,6 +43,12 @@ attr_reader :bar_name, :bar_till, :tab
    @tab = {:name => customer_name, :tab => drink_price}
  end
 
+ def add_to_tab(customer_name, drink_price)
+   if @tab[:name] == customer_name
+    @tab[:tab] = @tab[:tab] + drink_price
+   end 
+ end
+
 
 
 end

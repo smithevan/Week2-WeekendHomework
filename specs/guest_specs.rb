@@ -51,4 +51,8 @@ class GuestTest < Minitest::Test
     @guest1.drink_charge("Bob", @drink1.price)
     assert_equal(6.00, @guest1.wallet)
   end
+
+  def test_can_afford_drink
+    assert_equal(true, @guest1.can_afford_drink(@drink1.price))
+  end
 end
