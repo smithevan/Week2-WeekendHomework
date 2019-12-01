@@ -6,12 +6,13 @@ Minitest::Reporters.use! Minitest::Reporters::SpecReporter.new
 require_relative('../room')
 require_relative('../guest')
 require_relative('../song')
+require_relative('../bar')
 
 
 class RoomTest < Minitest::Test
 
   def setup
-    @room1 = Room.new("One", 4, 500.00)
+    @room1 = Room.new("One", 4, 500.00, 5.00)
 
     @guest1 = Guest.new("Bob", 10.00, "Back in Black ")
     @guest2 = Guest.new("Abby", 20.00, "Lonely Boy")
@@ -113,11 +114,11 @@ class RoomTest < Minitest::Test
   end
 
   def test_group_can_check_into_room__under_capacity
-    assert_equal(true, @room1.capacity_check(@group1))
+    assert_equal(true, @room1.capacity_check_group(@group1))
   end
 
   def test_group_can_check_into_room__over_capacity
-    assert_equal(false, @room1.capacity_check(@group2))
+    assert_equal(false, @room1.capacity_check_group(@group2))
   end
 
   def test_customer_wallet_decreases_when_entering_room
@@ -145,7 +146,6 @@ class RoomTest < Minitest::Test
     assert_equal("Whooo", @guest2.favourite_song(@song5.name))
     assert_nil(@guest1.favourite_song(@song5.name))
   end
-
 
 
 

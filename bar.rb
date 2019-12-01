@@ -39,14 +39,14 @@ attr_reader :bar_name, :bar_till, :tab
    @bar_till += item_sold
  end
 
- def run_tab(customer_name, drink_price)
-   @tab = {:name => customer_name, :tab => drink_price}
+ def run_tab(customer_name, price)
+   @tab = {:name => customer_name, :tab => price}
  end
 
- def add_to_tab(customer_name, drink_price)
+ def add_to_tab(customer_name, price)
    if @tab[:name] == customer_name
-    @tab[:tab] = @tab[:tab] + drink_price
-   end 
+    @tab[:tab] = @tab[:tab] + price
+   end
  end
 
 

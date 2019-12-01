@@ -14,10 +14,10 @@ class BarTest < Minitest::Test
 
     @bar1 = Bar.new("Karao-on-key", 1000.00)
 
-    @room1 = Room.new("One", 4, 500.00)
-    @room2 = Room.new("Two", 6, 500.00)
-    @room3 = Room.new("Three", 6, 500.00)
-    @room4 = Room.new("Four", 4, 500.00)
+    @room1 = Room.new("One", 4, 500.00, 5.00)
+    @room2 = Room.new("Two", 6, 500.00, 5.00)
+    @room3 = Room.new("Three", 6, 500.00, 5.00)
+    @room4 = Room.new("Four", 4, 500.00, 5.00)
 
     @bar_with_four_rooms = [@room1, @room2, @room3, @room4]
 
@@ -93,15 +93,16 @@ class BarTest < Minitest::Test
     @bar1.add_drink(@drink1)
     @guest1.take_drink(@drink1)
     @bar1.remove_drink(@drink1)
-    @guest1.drink_charge(nil, @drink1.price)
+    @guest1.charge(nil, @drink1.price)
     assert_equal(6.00, @guest1.wallet)
   end
 
   def test_buying_drink_increases_bar_till
     @bar1.add_drink(@drink1)
+    assert_equal(true, @guest1.can_afford_drink(@drink1.price))
     @guest1.take_drink(@drink1)
     @bar1.remove_drink(@drink1)
-    @guest1.drink_charge(nil, @drink1.price)
+    @guest1.charge(nil, @drink1.price)
     @bar1.make_sale(@drink1.price)
     assert_equal(1004.00, @bar1.bar_till)
   end
@@ -118,12 +119,28 @@ class BarTest < Minitest::Test
     @bar1.remove_drink(@drink2)
     @guest1.take_drink(@drink2)
     @bar1.add_to_tab(@guest1.name, @drink2.price)
-    @guest1.drink_charge(@bar1.tab[:name], @bar1.tab[:tab])
+    @guest1.charge(@bar1.tab[:name], @bar1.tab[:tab])
     @bar1.make_sale(@bar1.tab[:tab])
     assert_equal(1, @bar1.drink_count)
     assert_equal(1.50, @guest1.wallet)
     assert_equal(1008.50, @bar1.bar_till)
   end
+
+  def test_customer_can_move_in_and_out_of_rooms_and_pay_later
+    @bar1.add_rooms(@room1)
+    @bar1.add_rooms(@room2)
+    @room1.add_guest(@guest1)
+    @bar1.run_tab(@guest1.name, @room1.price)
+    @room1.checkout(@guest1)
+    @room2.add_guest(@guest1)
+    @bar1.add_to_tab(@guest1.name, @room2.price)
+    @room1.checkout(@guest1)
+    @guest1.charge(@bar1.tab[:name], @bar1.tab[:tab])
+    @bar1.make_sale(@bar1.tab[:tab])
+    assert_equal(0.00, @guest1.wallet)
+    assert_equal(1010.00, @bar1.bar_till)
+  end
+
 
 
 end

@@ -1,11 +1,12 @@
 class Room
 
-attr_reader :name, :capacity, :till
+attr_reader :name, :capacity, :till, :price
 
- def initialize(name, capacity, till)
+ def initialize(name, capacity, till, price)
    @name = name
    @capacity = capacity
    @till = till
+   @price = price
    @group = []
    @playlist = []
  end
@@ -46,7 +47,7 @@ end
    return @group.delete(guest_leaving)
  end
 
- def capacity_check(group)
+ def capacity_check_group(group)
    @group = group
    return true if @capacity >= @group.length
    return false

@@ -21,14 +21,14 @@ attr_reader :name, :wallet, :favourite_song
    @drinks.push(drink)
  end
 
- def drink_charge(name, price)
+ def charge(name, price)
   return @wallet -= price if name = @name || if name == nil
  end
  end
 
  def can_afford_drink(drink)
    return true if @wallet >= drink
-   return false 
+   return false
  end
 
 end
